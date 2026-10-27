@@ -1,0 +1,55 @@
+/* solar-flow.css - the Solar page (see js/solar-flow.js).
+   weewx-divumwx's power-flow diagram in the dashboard's themes;
+   wide = the full page, compact = phones. */
+.sol { max-width: 1150px; margin: 0 auto; }
+.sf-status { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--fg-dim); margin: 0 0 8px 4px; }
+.sf-status i { width: 9px; height: 9px; border-radius: 50%; background: var(--fg-faint); flex: none; }
+.sf-wrap { background: transparent; border: 0; padding: 12px 0; }
+svg.sf { display: block; width: 100%; height: auto; max-height: 70vh; margin: 0 auto; }
+svg.sf text { font-family: inherit; text-anchor: middle; }
+/* a panel-coloured base with the box colour at 20% over it (no color-mix, so older
+   browsers - tablets, Nest Hubs - get the colours too, not black) */
+.sf-box .sf-base { fill: #fff; fill: var(--panel-bg, #fff); stroke: none; }
+.sf-box .sf-bg { fill: #9AA0A8; fill: var(--c, #9AA0A8); fill-opacity: .2; stroke: #9AA0A8; stroke: var(--c, #9AA0A8); transition: fill .4s, stroke .4s; }
+.sf-box.idle { --c: #9AA0A8 !important; }
+.sf-box .sf-icon { color: var(--c); transition: color .4s; }
+.sf-name { font-weight: 700; fill: var(--fg); }
+.sf-box.idle .sf-name { fill: var(--fg-dim); }
+.sf-big { font-weight: 700; fill: var(--c); }
+.sf-val, .sf-sub { font-weight: 600; fill: var(--fg-dim); }
+.sf-wire { fill: none; stroke: var(--line); stroke-linecap: round; }
+.sf-tr { fill: none; stroke-linecap: round; transition: stroke .4s, opacity .4s; }
+.sf-tr.off { opacity: 0; animation: none; }
+.sf-pill rect { fill: var(--panel-bg); stroke: var(--line); stroke-width: 1.5; }
+.sf-pill text { font-size: 19px; font-weight: 700; fill: var(--fg); }
+svg.sf-wide .sf-bg { stroke-width: 3; stroke-opacity: 1; }
+svg.sf-wide .sf-name { font-size: 22px; }
+svg.sf-wide .sf-big { font-size: 30px; }
+svg.sf-wide .sf-val { font-size: 23px; }
+svg.sf-wide .sf-sub { font-size: 17px; }
+svg.sf-wide .sf-wire, svg.sf-wide .sf-tr { stroke-width: 5; }
+svg.sf-wide .sf-tr { stroke-dasharray: 26 34; animation: sfFlow var(--dur, 1.6s) linear infinite; }
+svg.sf-compact .sf-bg { stroke-width: 1.2; }
+svg.sf-compact .sf-name { font-size: 6.2px; }
+svg.sf-compact .sf-big { font-size: 8.5px; }
+svg.sf-compact .sf-val { font-size: 6.6px; }
+svg.sf-compact .sf-sub { font-size: 5.6px; }
+svg.sf-compact .sf-wire, svg.sf-compact .sf-tr { stroke-width: 2; }
+svg.sf-compact .sf-tr { stroke-dasharray: 5 7; animation: sfFlowC var(--dur, 1.6s) linear infinite; }
+@keyframes sfFlow { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
+@keyframes sfFlowC { from { stroke-dashoffset: 12; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { svg.sf .sf-tr { animation: none; stroke-dasharray: none; } }
+.sf-key { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 10px 6px 0; font-size: 14px; color: var(--fg-dim); }
+.sf-key span { display: inline-flex; align-items: center; gap: 6px; }
+.sf-key i { display: inline-block; width: 20px; height: 4px; border-radius: 2px; }
+.sol-today { margin: 18px 4px 6px; }
+.sol-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 26px; }
+.sol-h { font-size: 20px; font-weight: 700; margin-right: 4px; }
+.sol-chip { display: flex; align-items: center; gap: 8px; }
+.sol-chip > svg { flex: none; }
+.sol-chip > span { display: flex; flex-direction: column; line-height: 1.15; }
+.sol-chip small { font-size: 13px; color: var(--fg-dim); font-weight: 500; }
+.sol-chip b { font-size: 20px; font-weight: 700; white-space: nowrap; }
+.sol-chip b small { font-size: 13px; }
+.sol-more { margin-top: 12px; font-size: 15px; color: var(--fg-dim); line-height: 1.5; }
+.sol-src { margin-top: 14px; text-align: center; font-size: 13px; color: var(--fg-faint); }
